@@ -1,0 +1,27 @@
+### Architecture Decision
+
+## Plan
+
+For message passing strategies, we are considering three different techniques:
+
+1. RESTful APIs: This is the current strategy in use and provides a good basis for inter-service communication due to its simplicity and statelessness.
+
+2. Kafka: This is a distributed event streaming platform which can handle high volume real-time data feeds. It could be particularly useful for handling location updates which could potentially be a heavy traffic part of the system.
+
+3. gRPC: This is a high-performance, open-source framework developed by Google. It provides features like load balancing, tracing, health checking, and authentication. This could be useful for the Connection microservice which needs to make multiple requests to the Person and Location services.
+
+## Description of Architecture & Message Passing Techniques Interconnection
+
+1. Person Microservice: This service handles all operations related to the Person entities. We will continue to use the existing RESTful API endpoints for the operations.
+
+2. Location Microservice: This service handles all operations related to the Location entities. We will integrate Kafka here. As new location data is received, it would be published to a Kafka topic.
+
+3. Connection Microservice: This service retrieves connections between different people. It subscribes to the Kafka topic to receive new location data. It also needs to fetch Person data, so it uses gRPC to communicate with the Person Microservice.
+
+## Justification
+
+1. RESTful APIs: We decided to keep the RESTful API for the Person service due to its simplicity, wide usage, and compatibility with HTTP. As the Person service doesn't involve heavy traffic or complex transactions, REST is a simple and efficient choice.
+
+2. Kafka: We choose Kafka for the Location service because it is designed to handle real-time, high-volume data. As new location data is constantly being generated and it needs to be processed to find connections, using Kafka ensures that the system can handle this load and that no data is lost in the process.
+
+2. gRPC: We decided to use gRPC for the Connection service due to its efficiency and performance benefits over traditional HTTP/1.1. As the Connection service needs to make multiple requests to the other services, gRPC's support for HTTP/2 allows it to make these requests concurrently, improving overall performance.

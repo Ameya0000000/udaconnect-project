@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package person;
+
+service PersonService {
+    rpc SendPerson(PersonRequest) returns (PersonResponse) {}
+}
+
+message PersonRequest {
+    string message = 1;
+}
+
+message PersonResponse {
+    string message = 1;
+}

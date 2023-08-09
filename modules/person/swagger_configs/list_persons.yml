@@ -1,0 +1,30 @@
+---
+swagger: '2.0'
+info:
+  version: '1.0'
+  title: 'List Persons API'
+paths:
+  /persons:
+    get:
+      tags:
+      - 'Persons'
+      description: 'List all persons'
+      responses:
+        '200':
+          description: 'Successful response'
+          schema:
+            type: 'array'
+            items:
+              $ref: '#/definitions/Person'
+definitions:
+  Person:
+    type: 'object'
+    properties:
+      id:
+        type: 'integer'
+      first_name:
+        type: 'string'
+      last_name:
+        type: 'string'
+      company_name:
+        type: 'string'

@@ -1,0 +1,41 @@
+---
+swagger: '2.0'
+info:
+  version: '1.0'
+  title: 'Connections Operations'
+paths:
+  /connections/:
+    post:
+      tags:
+      - 'Connections'
+      description: 'Create a new connection'
+      parameters:
+      - in: 'body'
+        name: 'body'
+        required: true
+        schema:
+          $ref: '#/definitions/NewConnection'
+      responses:
+        '200':
+          description: 'Connection created successfully'
+          schema:
+            $ref: '#/definitions/Connection'
+definitions:
+  NewConnection:
+    type: 'object'
+    properties:
+      id:
+        type: 'string'
+        required: true
+      name:
+        type: 'string'
+        required: true
+  Connection:
+    type: 'object'
+    properties:
+      id:
+        type: 'string'
+        description: 'The connection identifier'
+      name:
+        type: 'string'
+        description: 'The connection details'

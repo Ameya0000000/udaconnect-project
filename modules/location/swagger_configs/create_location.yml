@@ -1,0 +1,44 @@
+---
+swagger: '2.0'
+info:
+  version: '1.0'
+  title: 'Create Location API'
+paths:
+  /locations:
+    post:
+      tags:
+      - 'Locations'
+      description: 'Create a new location'
+      parameters:
+      - in: 'body'
+        name: 'body'
+        required: true
+        schema:
+          $ref: '#/definitions/NewLocation'
+      responses:
+        '200':
+          description: 'Location created successfully'
+          schema:
+            $ref: '#/definitions/Location'
+definitions:
+  NewLocation:
+    type: 'object'
+    properties:
+      person_id:
+        type: 'integer'
+        required: true
+      wkt_shape:
+        type: 'string'
+        required: true
+  Location:
+    type: 'object'
+    properties:
+      id:
+        type: 'integer'
+      person_id:
+        type: 'integer'
+      wkt_shape:
+        type: 'string'
+      creation_time:
+        type: 'string'
+        format: 'date-time'

@@ -1,0 +1,35 @@
+---
+swagger: '2.0'
+info:
+  version: '1.0'
+  title: 'Get Location by ID API'
+paths:
+  /locations/{location_id}:
+    get:
+      tags:
+      - 'Locations'
+      description: 'Get a location by ID'
+      parameters:
+      - name: 'location_id'
+        in: 'path'
+        description: 'ID of the location to retrieve'
+        required: true
+        type: 'integer'
+      responses:
+        '200':
+          description: 'Successful response'
+          schema:
+            $ref: '#/definitions/Location'
+definitions:
+  Location:
+    type: 'object'
+    properties:
+      id:
+        type: 'integer'
+      person_id:
+        type: 'integer'
+      wkt_shape:
+        type: 'string'
+      creation_time:
+        type: 'string'
+        format: 'date-time'

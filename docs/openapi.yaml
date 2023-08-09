@@ -1,0 +1,125 @@
+openapi: 3.0.1
+info:
+  title: Udaconnect
+  version: "1.0"
+
+servers:
+  - url: 'http://192.168.49.2:31003'
+    description: Connection API Server
+  - url: 'http://192.168.49.2:31002'
+    description: Location API Server
+  - url: 'http://192.168.49.2:30004'
+    description: Person API Server
+
+paths:
+  /api/:
+    get:
+      summary: API Info
+      responses:
+        '200':
+          description: Successful response
+
+  /connections/:
+    get:
+      summary: List All Connections
+      responses:
+        '200':
+          description: Successful response
+    post:
+      summary: Create Connection
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                name:
+                  type: string
+      responses:
+        '201':
+          description: Connection created
+
+  /persons/1/connection:
+    get:
+      summary: Get Connection Data for Person
+      parameters:
+        - name: start_date
+          in: query
+          schema:
+            type: string
+        - name: end_date
+          in: query
+          schema:
+            type: string
+        - name: distance
+          in: query
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful response
+
+  /api/locations:
+    post:
+      summary: Create Location
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                some_field:
+                  type: string
+                another_field:
+                  type: string
+      responses:
+        '201':
+          description: Location created
+
+  /api/locations/{location_id}:
+    get:
+      summary: Retrieve Location by ID
+      parameters:
+        - name: location_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+
+  /api/persons:
+    get:
+      summary: List All Persons
+      responses:
+        '200':
+          description: Successful response
+    post:
+      summary: Create Person
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                #... Need to define fields for the Person here
+      responses:
+        '201':
+          description: Person created
+
+  /api/persons/{person_id}:
+    get:
+      summary: Retrieve Person by ID
+      parameters:
+        - name: person_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+

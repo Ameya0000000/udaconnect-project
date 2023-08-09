@@ -1,0 +1,46 @@
+---
+swagger: '2.0'
+info:
+  version: '1.0'
+  title: 'Create Person API'
+paths:
+  /persons:
+    post:
+      tags:
+      - 'Persons'
+      description: 'Create a new person'
+      parameters:
+      - in: 'body'
+        name: 'body'
+        required: true
+        schema:
+          $ref: '#/definitions/NewPerson'
+      responses:
+        '200':
+          description: 'Person created successfully'
+          schema:
+            $ref: '#/definitions/Person'
+definitions:
+  NewPerson:
+    type: 'object'
+    properties:
+      first_name:
+        type: 'string'
+        required: true
+      last_name:
+        type: 'string'
+        required: true
+      company_name:
+        type: 'string'
+        required: true
+  Person:
+    type: 'object'
+    properties:
+      id:
+        type: 'integer'
+      first_name:
+        type: 'string'
+      last_name:
+        type: 'string'
+      company_name:
+        type: 'string'

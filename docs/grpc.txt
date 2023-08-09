@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+// Connection Service
+package connection;
+service ConnectionService {
+    rpc SendConnection(ConnectionRequest) returns (ConnectionResponse) {}
+}
+message ConnectionRequest { string message = 1; }
+message ConnectionResponse { string message = 1; }
+
+// Location Service
+package location;
+service LocationtionService {
+    rpc SendLocation(LocationRequest) returns (LocationResponse) {}
+}
+message LocationRequest { string message = 1; }
+message LocationResponse { string message = 1; }
+
+// Person Service
+package person;
+service PersonService {
+    rpc SendPerson(PersonRequest) returns (PersonResponse) {}
+}
+message PersonRequest { string message = 1; }
+message PersonResponse { string message = 1; }

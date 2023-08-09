@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package location;
+
+service LocationtionService {
+    rpc SendLocation(LocationRequest) returns (LocationResponse) {}
+}
+
+message LocationRequest {
+    string message = 1;
+}
+
+message LocationResponse {
+    string message = 1;
+}

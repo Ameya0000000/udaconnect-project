@@ -1,0 +1,329 @@
+{
+	"info": {
+		"_postman_id": "1cda3793-31f8-4a8d-bec1-cbcc7e8cc042",
+		"name": "Udaconnect",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26101946"
+	},
+	"item": [
+		{
+			"name": "Connection",
+			"item": [
+				{
+					"name": "API Info",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://192.168.49.2:31003/api/",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"49",
+								"2"
+							],
+							"port": "31003",
+							"path": [
+								"api",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List All Connections",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://192.168.49.2:31003/connections/",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"49",
+								"2"
+							],
+							"port": "31003",
+							"path": [
+								"connections",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Connection",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": \"sample-id\",\r\n  \"name\": \"sample-name\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://192.168.49.2:31003/connections/",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"49",
+								"2"
+							],
+							"port": "31003",
+							"path": [
+								"connections",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Connection Data for Person",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://192.168.49.2:31003/persons/1/connection?start_date=2023-08-01&end_date=2023-08-31&distance=100",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"49",
+								"2"
+							],
+							"port": "31003",
+							"path": [
+								"persons",
+								"1",
+								"connection"
+							],
+							"query": [
+								{
+									"key": "start_date",
+									"value": "2023-08-01"
+								},
+								{
+									"key": "end_date",
+									"value": "2023-08-31"
+								},
+								{
+									"key": "distance",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Location",
+			"item": [
+				{
+					"name": "API Info",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://192.168.49.2:31002/api/",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"49",
+								"2"
+							],
+							"port": "31002",
+							"path": [
+								"api",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Location",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"some_field\": \"some_value\",\r\n  \"another_field\": \"another_value\"\r\n}\r\n"
+						},
+						"url": {
+							"raw": "http://192.168.49.2:31002/api/locations",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"49",
+								"2"
+							],
+							"port": "31002",
+							"path": [
+								"api",
+								"locations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retrieve Location by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://192.168.49.2:31002/api/locations/{location_id}",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"49",
+								"2"
+							],
+							"port": "31002",
+							"path": [
+								"api",
+								"locations",
+								"{location_id}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Person",
+			"item": [
+				{
+					"name": "API Info",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://192.168.49.2:30004/api/",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"49",
+								"2"
+							],
+							"port": "30004",
+							"path": [
+								"api",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List All Persons",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://192.168.49.2:30004/api/persons",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"49",
+								"2"
+							],
+							"port": "30004",
+							"path": [
+								"api",
+								"persons"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Person",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://192.168.49.2:30004/api/persons",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"49",
+								"2"
+							],
+							"port": "30004",
+							"path": [
+								"api",
+								"persons"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retrieve Person by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://192.168.49.2:30004/api/persons/{person_id}",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"49",
+								"2"
+							],
+							"port": "30004",
+							"path": [
+								"api",
+								"persons",
+								"{person_id}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

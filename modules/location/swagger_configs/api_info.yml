@@ -1,0 +1,19 @@
+---
+swagger: '2.0'
+info:
+  version: '1.0'
+  title: 'API Information'
+paths:
+  /api/:
+    get:
+      tags:
+      - 'API Info'
+      description: 'API information endpoint'
+      responses:
+        '200':
+          description: 'Successful response'
+          schema:
+            type: 'object'
+            properties:
+              message:
+                type: 'string'
