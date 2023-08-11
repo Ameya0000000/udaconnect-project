@@ -189,27 +189,8 @@ Your architecture diagram should focus on the services and how they talk to one 
 * We can access a running Docker container using `kubectl exec -it <pod_id> sh`. From there, we can `curl` an endpoint to debug network issues.
 * The starter project uses Python Flask. Flask doesn't work well with `asyncio` out-of-the-box. Consider using `multiprocessing` to create threads for asynchronous behavior in a standard Flask application.
 
-- person
-  - Dockerfile
-  - requirements.txt
-  - wsgi.py
-  - app
-    - __init__.py
-    - config.py
-    - routes.py
-    - udaconnect_person
-      - __init__.py
-      - person_pb2_grpc.py
-      - person_pb2.py
-      - controllers.py
-      - grpcservice.py
-      - kafkaservice.py
-      - models.py
-      - schemas.py
-      - services.py
-  - protos
-    - person.proto
-  - swagger_configs
-    - create_person.yml
-    - get_person.yml
-    - list_persons.yml
+### Some Project's Commands
+
+python -m grpc_tools.protoc -I./protos --python_out=./app/udaconnect_connection --grpc_python_out=./app/udaconnect_connection ./protos/connection.proto
+python -m grpc_tools.protoc -I./protos --python_out=./app/udaconnect_location --grpc_python_out=./app/udaconnect_location ./protos/location.proto
+python -m grpc_tools.protoc -I./protos --python_out=./app/udaconnect_person --grpc_python_out=./app/udaconnect_person ./protos/person.proto

@@ -14,6 +14,8 @@ servers:
 paths:
   /api/:
     get:
+      tags:
+        - Meta
       summary: API Info
       responses:
         '200':
@@ -21,42 +23,40 @@ paths:
 
   /connections/:
     get:
+      tags:
+        - Connection
       summary: List All Connections
       responses:
         '200':
           description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Connection'
     post:
+      tags:
+        - Connection
       summary: Create Connection
       requestBody:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                id:
-                  type: string
-                name:
-                  type: string
+              $ref: '#/components/schemas/Connection'
       responses:
         '201':
           description: Connection created
 
   /persons/1/connection:
     get:
+      tags:
+        - Connection
       summary: Get Connection Data for Person
       parameters:
-        - name: start_date
-          in: query
-          schema:
-            type: string
-        - name: end_date
-          in: query
-          schema:
-            type: string
-        - name: distance
-          in: query
-          schema:
-            type: integer
+        - $ref: '#/components/parameters/StartDate'
+        - $ref: '#/components/parameters/EndDate'
+        - $ref: '#/components/parameters/Distance'
       responses:
         '200':
           description: Successful response
@@ -123,3 +123,28 @@ paths:
         '200':
           description: Successful response
 
+components:
+  schemas:
+    Connection:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+  parameters:
+    StartDate:
+      name: start_date
+      in: query
+      schema:
+        type: string
+    EndDate:
+      name: end_date
+      in: query
+      schema:
+        type: string
+    Distance:
+      name: distance
+      in: query
+      schema:
+        type: integer

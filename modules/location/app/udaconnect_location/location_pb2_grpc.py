@@ -2,7 +2,7 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-import location_pb2 as location__pb2
+from . import location_pb2 as location__pb2
 
 
 class LocationtionServiceStub(object):

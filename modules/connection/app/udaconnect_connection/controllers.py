@@ -6,9 +6,15 @@ from .schemas import ConnectionSchema
 from .services import ConnectionService
 from flask import request
 from flask_accepts import accepts, responds
-from flask_restx import Namespace, Resource
-from typing import Optional
-from flask_restx import Resource, Api, fields
+from flask_restx import Namespace, Resource, Api, fields
+
+# Imports for Kafka and gRPC integration
+from .kafkaservice import KafkaService
+from .grpcservice import GRPCService
+
+# Instantiating Kafka and gRPC services
+kafka_service = KafkaService(kafka_topic="connection_topic")
+grpc_service = GRPCService(server_address="localhost:50051")
 
 DATE_FORMAT = "%Y-%m-%d"
 
@@ -55,19 +61,8 @@ class APIInfoResource(Resource):
 class ConnectionDataResource(Resource):
     @responds(schema=ConnectionSchema, many=True)
     def get(self, person_id) -> ConnectionSchema:
-        start_date: datetime = datetime.strptime(
-            request.args["start_date"], DATE_FORMAT
-        )
-        end_date: datetime = datetime.strptime(request.args["end_date"], DATE_FORMAT)
-        distance: Optional[int] = request.args.get("distance", 5)
-
-        results = ConnectionService.find_contacts(
-            person_id=person_id,
-            start_date=start_date,
-            end_date=end_date,
-            meters=distance,
-        )
-        return results
+        # Logic
+        pass
 
 def register_routes(api, app, root="api"):
     api.add_namespace(api)

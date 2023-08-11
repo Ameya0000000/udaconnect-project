@@ -1,6 +1,6 @@
 import grpc
-import person_pb2
-import person_pb2_grpc
+from . import person_pb2
+from . import person_pb2_grpc
 
 class GRPCService:
     def __init__(self, server_address):

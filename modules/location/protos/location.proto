@@ -7,7 +7,10 @@ service LocationtionService {
 }
 
 message LocationRequest {
-    string message = 1;
+    int32 person_id = 1;
+    string creation_time = 2;
+    float latitude = 3;
+    float longitude = 4;
 }
 
 message LocationResponse {

@@ -7,12 +7,12 @@ from .models import Location
 from .schemas import LocationSchema
 from geoalchemy2.functions import ST_AsText, ST_Point
 from sqlalchemy.sql import text
+from .kafkaservice import KafkaService
 
 db = SQLAlchemy()
 
 logging.basicConfig(level=logging.WARNING)
 logger = logging.getLogger("location-api")
-
 
 class LocationService:
     @staticmethod
@@ -23,7 +23,6 @@ class LocationService:
             .one()
         )
 
-        # Rely on database to return text form of point to reduce overhead of conversion in app code
         location.wkt_shape = coord_text
         return location
 
@@ -40,5 +39,8 @@ class LocationService:
         new_location.coordinate = ST_Point(location["latitude"], location["longitude"])
         db.session.add(new_location)
         db.session.commit()
+
+        kafka_service = KafkaService(kafka_topic="location_topic")
+        kafka_service.send_message(str(new_location.id))
 
         return new_location
