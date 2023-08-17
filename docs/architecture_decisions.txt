@@ -2,30 +2,26 @@
 
 ## Plan
 
-For message passing strategies, we are considering three different techniques:
+To fulfill the UdaConnect business requirements, we've assessed three primary communication techniques:
+1. RESTful APIs: Simple and stateless, ideal for CRUD operations on clearly-defined entities.
+2. Kafka: A scalable event streaming platform, perfect for ingesting real-time, high-volume data feeds.
+3. gRPC: A high-performance framework, optimized for high-volume data collection and concurrent requests.
 
-1. RESTful APIs: Currently employed in the starter project, offering simplicity and statelessness, ideal for CRUD operations on well-defined entities.
+## Architecture Description & Interconnection of Message Passing Techniques
 
-2. Kafka: A robust distributed event streaming platform designed for high volume real-time data feeds. Suitable for ingesting large volumes of location data.
-
-3. gRPC: A high-performance, open-source framework with efficient features for inter-service communication, ideal for collecting high volume data and making concurrent requests.
-
-## Description of Architecture & Message Passing Techniques Interconnection
-
-1. Person Microservice: Manages operations related to Person entities. It employs RESTful API endpoints for CRUD operations, offering a straightforward method for maintaining and querying person records.
-
-2. Location Microservice (Data Ingestion): This service is the first point of contact for ingesting new location data. It employs gRPC to efficiently collect high volume location data from users. After data collection, it acts as a Kafka producer, pushing each piece of location data to a Kafka topic.
-
-3. Location Microservice (Data Storage): Acts as a Kafka consumer, subscribing to the Kafka topic where the location data is published. Upon data consumption, it stores this data in the database, ensuring durability and availability for other services.
-
-4. Connection Microservice: Finds connections between people based on their locations. It fetches new location data by subscribing to the Kafka topic and fetches Person data via the RESTful API provided by the Person Microservice.
+1. Person Microservice: Manages the operations related to Person entities.
+- Communication: Uses RESTful API endpoints for CRUD operations. This ensures simplicity in handling and querying person records.
+2. Location Microservice (Data Ingestion): This service ingests new location data.
+- Communication: The service uses gRPC for high-performance data collection, making it highly efficient for ingesting large volumes of location data from users. Once the data is collected, this microservice acts as a Kafka producer, sending each piece of location data to a dedicated Kafka topic.
+3.Location Microservice (Data Storage): Processes and stores the ingested location data.
+- Communication: This service acts as a Kafka consumer, fetching location data from the Kafka topic and then storing this data in the appropriate database.
+4. Connection Microservice: Identifies connections between people based on their locations.
+- Communication: Fetches location data by subscribing to the Kafka topic, and retrieves Person data through the RESTful API endpoints provided by the Person Microservice.
 
 ## Justification
 
-1. RESTful APIs: Retained for the Person service due to its simplicity, ubiquity, and compatibility with HTTP. Since the Person service experiences moderate traffic and straightforward transactions, REST is both efficient and adequate.
+1. RESTful APIs: Adopted for the Person service due to simplicity, wide acceptance, and compatibility with HTTP. The traffic and operations of the Person service are moderate, making REST an efficient choice.
+2. Kafka: Chosen for location data processing because of its prowess in managing real-time, high-volume data streams. By dividing the Location service into data ingestion and storage parts, the ingestion process becomes more efficient, ensuring no data is lost even during high demands.
+3. gRPC: Incorporated for the Location Microservice (Data Ingestion) specifically to offer performance benefits over the conventional HTTP/1.1. With the potential high traffic of location data, gRPC's support for HTTP/2 ensures efficient, concurrent data collection, clearly pinpointing its use in our architecture.
 
-2. Kafka: Employed for the flow of location data due to its ability to handle real-time, high-volume data streams. By splitting the Location service into data ingestion and data storage components, we optimize the ingestion process and ensure that no data is lost, even during peak loads.
-
-3. gRPC: Integrated into the initial Location service (Data Ingestion) for its efficiency and performance advantages over traditional HTTP/1.1. Given the potential volume of location data, gRPC's support for HTTP/2 enables efficient and concurrent data collection.
-
-Cost and Scalability Considerations: Given the impending launch in two weeks with a limited budget, this architecture is tailored as an MVP, focusing only on necessary features. By containerizing services, we ensure easy deployment and scalability. Kafka's integration specifically addresses the need to handle a large volume of location data, making this design both cost-effective and scalable.
+## Cost and Scalability Considerations: Keeping in mind the two-week launch timeframe and a limited budget, this architecture is fine-tuned as an MVP, focusing solely on core features. Containerizing these services guarantees streamlined deployment and scalability. By integrating Kafka, we directly address the challenge of handling vast amounts of location data, making this design both cost-efficient and scalable.

@@ -5,8 +5,7 @@ import connection_pb2_grpc
 
 class ConnectionServiceServicer(connection_pb2_grpc.ConnectionServiceServicer):
     def SendConnection(self, request, context):
-        # Implement your logic to handle the gRPC message here. 
-        # For now, we'll just echo the received message back as a response.
+       
         response = connection_pb2.ConnectionResponse()
         response.message = "Received message: " + request.message
         return response
