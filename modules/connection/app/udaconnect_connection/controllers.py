@@ -8,20 +8,15 @@ from flask import request
 from flask_accepts import accepts, responds
 from flask_restx import Namespace, Resource, Api, fields
 
-# Imports for Kafka and gRPC integration
+# Kafka Importation
 from .kafkaservice import KafkaService
-from .grpcservice import GRPCService
 
-# Instantiating Kafka and gRPC services
 kafka_service = KafkaService(kafka_topic="connection_topic")
-grpc_service = GRPCService(server_address="localhost:50051")
 
 DATE_FORMAT = "%Y-%m-%d"
 
-api = Namespace("UdaConnect", description="Connections via geolocation.")  # noqa
-api = Api(version='1.0', title='Connection API',
-    description='A simple Connection API',
-)
+api = Namespace("UdaConnect", description="Connections via geolocation.")
+api = Api(version='1.0', title='Connection API', description='A simple Connection API',)
 
 ns = api.namespace('connections', description='Connection operations')
 

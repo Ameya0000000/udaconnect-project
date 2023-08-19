@@ -8,9 +8,8 @@ from flask import request
 from flask_accepts import accepts, responds
 from flask_restx import Namespace, Resource
 from .grpcservice import GRPCService
-from .kafkaservice import KafkaService
 
-api = Namespace("UdaConnect", description="Connections via geolocation.")  # noqa
+api = Namespace("UdaConnect", description="Connections via geolocation.")
 
 class MessageSchema(Schema):
     message = fields.Str(required=True)
